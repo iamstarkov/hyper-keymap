@@ -1,0 +1,34 @@
+{
+  "name": "hyper-keymap",
+  "version": "0.0.0",
+  "description": "Hyper keymap, highly cusomizable",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/iamstarkov/hyper-keymap.git"
+  },
+  "keywords": [
+    "hyper",
+    "hyperterm",
+    "hyper-plugin",
+    "hyperterm-plugin",
+    "keymap",
+    "hotkey",
+    "hotkeys",
+    "shortcut",
+    "shortcuts",
+    "keybinding",
+    "kebindings",
+    "keymap",
+    "keymaps"
+  ],
+  "author": "Vladimir Starkov <iamstarkov@gmail.com> (https://iamstarkov.com)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/iamstarkov/hyper-keymap/issues"
+  },
+  "homepage": "https://github.com/iamstarkov/hyper-keymap#readme",
+  "dependencies": {
+    "ramda": "^0.22.1"
+  }
+}
