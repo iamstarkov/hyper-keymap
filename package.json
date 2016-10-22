@@ -8,6 +8,9 @@
     "lint": "eslint .",
     "coverage": "nyc ava"
   },
+  "engines" : {
+    "node" : ">=6.5.0"
+  },
   "eslintConfig": {
     "extends": [
       "pedant"
