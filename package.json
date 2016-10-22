@@ -18,6 +18,9 @@
     "plugins": [
       "require-path-exists"
     ],
+    "ignore": [
+      "coverage"
+    ],
     "env": {
       "node": true,
       "es6": true
