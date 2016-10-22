@@ -1,5 +1,5 @@
 const R = require('ramda');
-const defaultKeymap = require('./keymap');
+const defaultKeymap = require('./default-keymap');
 
 let userKeymap;
 const decorateConfig = config => {

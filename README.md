@@ -27,7 +27,7 @@ Or with [hpm][hpm]
 
 ## Usage
 
-There is a [default keymap](./keymap.js), exported from Hyper.
+There is a [default keymap](./default-keymap.js), exported from Hyper.
 
 In order to rebind keys you need to add `keymap` object to your config, so it looks this:
 
