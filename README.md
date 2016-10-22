@@ -1,5 +1,10 @@
 # hyper-keymap
 
+[![NPM version][npm-image]][npm-url]
+[![Build Status][travis-image]][travis-url]
+[![Coveralls Status][coveralls-image]][coveralls-url]
+[![Dependency Status][depstat-image]][depstat-url]
+
 > Hotkeys management for Hyper
 
 ## Install
@@ -99,3 +104,16 @@ Check out Electron's [accelerators][elacc] documentation.
 ## License
 
 MIT © [Vladimir Starkov](https://iamstarkov.com)
+
+
+[npm-url]: https://npmjs.org/package/hyper-keymap
+[npm-image]: https://img.shields.io/npm/v/hyper-keymap.svg?style=flat-square
+
+[travis-url]: https://travis-ci.org/iamstarkov/hyper-keymap
+[travis-image]: https://img.shields.io/travis/iamstarkov/hyper-keymap.svg?style=flat-square
+
+[coveralls-url]: https://coveralls.io/r/iamstarkov/hyper-keymap
+[coveralls-image]: https://img.shields.io/coveralls/iamstarkov/hyper-keymap.svg?style=flat-square
+
+[depstat-url]: https://david-dm.org/iamstarkov/hyper-keymap
+[depstat-image]: https://david-dm.org/iamstarkov/hyper-keymap.svg?style=flat-square
