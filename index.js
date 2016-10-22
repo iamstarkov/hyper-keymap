@@ -63,7 +63,10 @@ const decorateMenu = menus => {
   ));
 }
 
+const id = x => x;
+
 module.exports = {
   decorateConfig,
   decorateMenu,
+  id,
 }
