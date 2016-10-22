@@ -3,6 +3,31 @@
   "version": "0.0.0",
   "description": "Hotkeys management for Hyper",
   "main": "index.js",
+  "scripts": {
+    "test": "ava",
+    "lint": "eslint .",
+    "coverage": "nyc ava"
+  },
+  "eslintConfig": {
+    "extends": [
+      "pedant"
+    ],
+    "plugins": [
+      "require-path-exists"
+    ],
+    "env": {
+      "node": true,
+      "es6": true
+    },
+    "parserOptions": {
+      "ecmaVersion": 2016,
+      "sourceType": "module",
+      "ecmaFeatures": {
+        "impliedStrict": true,
+        "jsx": true
+      }
+    }
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/iamstarkov/hyper-keymap.git"
@@ -30,5 +55,11 @@
   "homepage": "https://github.com/iamstarkov/hyper-keymap#readme",
   "dependencies": {
     "ramda": "^0.22.1"
+  },
+  "devDependencies": {
+    "ava": "^0.16.0",
+    "eslint": "^3.8.1",
+    "eslint-config-pedant": "^0.8.0",
+    "eslint-plugin-require-path-exists": "^1.1.5"
   }
 }
