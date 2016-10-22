@@ -29,7 +29,7 @@ Or with [hpm][hpm]
 
 There is a [default keymap](./keymap.js), exported from Hyper.
 
-If you want to rebind some keys open your Hyper preferences and add `keymap` object to your config, so it looks like this:
+In order to rebind keys you need to add `keymap` object to your config, so it looks this:
 
 ```js
 module.exports = {
