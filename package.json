@@ -7,7 +7,7 @@
     "test": "ava",
     "lint": "eslint .",
     "coverage": "nyc ava",
-    "coveralls": "npm run coverage -- && coveralls < coverage/lcov.info"
+    "coveralls": "nyc ava && coveralls < coverage/lcov.info"
   },
   "engines": {
     "node": ">=6.5.0"
