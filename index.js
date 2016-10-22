@@ -32,7 +32,7 @@ const decorateMenu = menus => {
   };
 
   const rebindConflictedAccelerators = item => {
-    const { label, accelerator, command } = item;
+    const { accelerator, command } = item;
     if (!command) {
       return item;
     }
