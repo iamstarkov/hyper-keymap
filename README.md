@@ -22,9 +22,9 @@ Or with [hpm][hpm]
 
 ## Usage
 
-If you want to change some parts of [default keymap](./keymap.js),
-open your Hyper preferences and add `keymap` object to your config,
-so it looks like this:
+There is a [default keymap](./keymap.js), exported from Hyper.
+
+If you want to rebind some keys open your Hyper preferences and add `keymap` object to your config, so it looks like this:
 
 ```js
 module.exports = {
@@ -57,9 +57,23 @@ keymap: {
 
 Your keymap has prio over default one.
 
-You can read about more about [menu][elmenu] and [accelerators][elacc] Electron's docs.
+## Electron's accelerator
 
-List of supported Hyper commands:
+It is a way to define keyboard shortcuts.
+
+Accelerators can contain multiple modifiers and key codes, combined by the `+` character.
+
+Examples:
+
+* `CommandOrControl+A`
+* `CommandOrControl+Shift+Z`
+
+
+Check out Electron's [accelerators][elacc] documentation.
+
+[elacc]: http://electron.atom.io/docs/api/accelerator/
+
+## List of supported Hyper commands
 
 * `show-settings`
 * `new-window`
@@ -81,12 +95,6 @@ List of supported Hyper commands:
 * `next-tab`
 * `prev-pane`
 * `next-pane`
-
-
-[elmenu]: http://electron.atom.io/docs/api/menu/
-[elacc]: http://electron.atom.io/docs/api/accelerator/
-
-
 
 ## License
 
