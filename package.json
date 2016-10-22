@@ -1,7 +1,7 @@
 {
   "name": "hyper-keymap",
   "version": "0.0.0",
-  "description": "Hyper keymap, highly cusomizable",
+  "description": "Hotkeys management for Hyper",
   "main": "index.js",
   "repository": {
     "type": "git",
