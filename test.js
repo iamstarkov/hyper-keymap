@@ -88,6 +88,19 @@ test('bindUserAccelerators: default keymap is used when there is no suitable use
   t.deepEqual(actual, expected);
 });
 
+test('rebindConflictedAccelerators: ignore item wo/ "command" prop', t => {
+  const rebindConflictedAcceleratorsFn = rebindConflictedAccelerators({});
+  const items = [
+    { role: 'about' },
+    { type: 'separator' }
+  ];
+
+  const actual = items.map(rebindConflictedAcceleratorsFn);
+  const expected = items;
+
+  t.deepEqual(actual, expected);
+});
+
 test('rebindConflictedAccelerators: use another default accelerator if its conflicted', t => {
   const rebindConflictedAcceleratorsFn = rebindConflictedAccelerators({
     userKeymapFn: R.always({ 'CmdOrCtrl+Alt+Right': 'next-pane' }),
