@@ -71,17 +71,18 @@ const rebindConflictedAccelerators = item => {
   return R.merge(item, { accelerator: newAccelerator });
 }
 
-const decorateMenu = R.map(R.over(
+const decorateMenuWith = fn => R.map(R.over(
   R.lensProp('submenu'),
-  R.map(R.pipe(
-    addCommand(predefinedMenuCommands),
-    bindAccelerators,
-    rebindConflictedAccelerators
-  ))
+  R.map(fn)
 ));
 
 module.exports = {
   capture,
   decorateConfig: R.tap(capture('keymap', storage)),
-  decorateMenu,
+  decorateMenuWith,
+  decorateMenu: decorateMenuWith(R.pipe(
+    addCommand(predefinedMenuCommands),
+    bindAccelerators,
+    rebindConflictedAccelerators
+  ))
 }
