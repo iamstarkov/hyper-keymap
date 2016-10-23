@@ -3,6 +3,11 @@
   "version": "0.0.0",
   "description": "Hotkeys management for Hyper",
   "main": "index.js",
+  "files": [
+    "default-keymap.js",
+    "index.js",
+    "predefined-menu-commands.js"
+  ],
   "scripts": {
     "test": "ava",
     "lint": "eslint .",
