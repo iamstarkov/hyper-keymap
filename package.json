@@ -40,6 +40,10 @@
       "default-keymap.js",
       "predefined-menu-commands.js",
       "test.js"
+    ],
+    "reporter": [
+      "text",
+      "lcov"
     ]
   },
   "repository": {
