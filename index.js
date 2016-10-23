@@ -12,9 +12,10 @@ const acceleratorsReducerBy = inputCommand =>
   (accelerators, [accelerator, command]) =>
     accelerators.concat((inputCommand === command) ? [accelerator] : []);
 
-const findAccelerators = keymap => inputCommand => {
-  return R.toPairs(keymap).reduce(acceleratorsReducerBy(inputCommand) , []);
-}
+const findAccelerators = R.curry(
+  (keymap, inputCommand) =>
+    R.toPairs(keymap).reduce(acceleratorsReducerBy(inputCommand) , [])
+);
 
 const addCommand = predefined => {
   const labelsToPredefine = R.pluck('label', predefined);
@@ -31,14 +32,14 @@ const addCommand = predefined => {
   };
 }
 
-const bindUserAccelerators = ({ findUserAccelerators, findDefaultAccelerators }) => item => {
+const bindUserAccelerators = ({ userKeymapFn, defaultKeymapFn }) => item => {
   const { command } = item;
   if (!command) {
     return item;
   }
 
-  const userAccelerator = findUserAccelerators(command)[0];
-  const defaultAccelerator = findDefaultAccelerators(command)[0];
+  const userAccelerator = findAccelerators(userKeymapFn(), command)[0];
+  const defaultAccelerator = findAccelerators(defaultKeymapFn(), command)[0];
 
   return R.merge(item, {
     accelerator: (userAccelerator || defaultAccelerator),
@@ -87,8 +88,8 @@ module.exports = {
   decorateMenu: decorateMenuWith(R.pipe(
     addCommand(predefinedMenuCommands),
     bindUserAccelerators({
-      findUserAccelerators: findAccelerators(storage.keymap),
-      findDefaultAccelerators: findAccelerators(defaultKeymap),
+      userKeymapFn: R.always(storage.keymap),
+      defaultKeymapFn: R.always(defaultKeymap),
     }),
     rebindConflictedAccelerators
   ))

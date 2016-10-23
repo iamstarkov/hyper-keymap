@@ -62,28 +62,28 @@ test('dont bindUserAccelerators if item doesnt have command prop', t => {
   t.deepEqual(actual, expected);
 });
 
-test('bindUserAccelerators: users accelerators have prio over default ones', t => {
+test('bindUserAccelerators: users keymap has prio over default', t => {
   const bindUserAcceleratorsFn = bindUserAccelerators({
-    findUserAccelerators: R.always(['A']),
-    findDefaultAccelerators: R.always(['B', 'C']),
+    userKeymapFn: R.always({ 'A': 'cmd' }),
+    defaultKeymapFn: R.always({ 'B': 'cmd', 'C': 'cmd' }),
   });
-  const item = { command: 'CMD' };
+  const item = { command: 'cmd' };
 
   const actual = bindUserAcceleratorsFn(item);
-  const expected = { command: 'CMD', accelerator: 'A' };
+  const expected = { command: 'cmd', accelerator: 'A' };
 
   t.deepEqual(actual, expected);
 });
 
-test('bindUserAccelerators: default accelerators are used one there are no user ones', t => {
+test('bindUserAccelerators: default keymap is used when there is no suitable user keymap for relevand command', t => {
   const bindUserAcceleratorsFn = bindUserAccelerators({
-    findUserAccelerators: R.always([]),
-    findDefaultAccelerators: R.always(['B', 'C']),
+    userKeymapFn: R.always({}),
+    defaultKeymapFn: R.always({ 'B': 'cmd', 'C': 'cmd' }),
   });
-  const item = { command: 'CMD' };
+  const item = { command: 'cmd' };
 
   const actual = bindUserAcceleratorsFn(item);
-  const expected = { command: 'CMD', accelerator: 'B' };
+  const expected = { command: 'cmd', accelerator: 'B' };
 
   t.deepEqual(actual, expected);
 });
