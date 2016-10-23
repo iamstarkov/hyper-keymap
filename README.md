@@ -25,6 +25,17 @@ Or use [hpm][hpm]
 
 [hpm]: https://npm.im/hpm-cli
 
+## 🤔 Caveats
+
+Some hotkeys can still not be working, like `CmdOrCtrl+Alt+Left`,
+because right now Hyper (`v0.8.3`) is binding this and several others keys.
+Those keys are semi-working.  
+
+Though, 🎉 good news, i submitted [pull-request][pr] to Hyper to fix that.
+Check it out, and if you want comment there what do you think about it 🗯. Any feedback is welcomed.
+
+[pr]: https://github.com/zeit/hyper/pull/925
+
 ## Usage
 
 There is a [default keymap](./src/default-keymap.js), which is used by Hyper.
