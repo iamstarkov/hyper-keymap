@@ -49,7 +49,7 @@ test('dont addCommand if not exists in predefined', t => {
   t.is(actual.command, expected.command);
 });
 
-test('dont bindUserAccelerators if item doesnt have command prop', t => {
+test('bindUserAccelerators: ignore item wo/ "command" prop', t => {
   const bindUserAcceleratorsFn = bindUserAccelerators({});
   const items = [
     { role: 'about' },
