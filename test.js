@@ -1,6 +1,6 @@
 import test from 'ava';
 import R from 'ramda';
-import { capture, decorateMenuWith, addCommand } from './';
+import { capture, decorateMenuWith, addCommand, bindUserAccelerators } from './';
 
 
 test('capture', t => {
@@ -46,4 +46,43 @@ test('dont addCommand if not exists in predefined', t => {
   const expected = { label: 'LBL1', click() {}};
 
   t.is(actual.command, expected.command);
+});
+
+test('dont bindUserAccelerators if item doesnt have command prop', t => {
+  const bindUserAcceleratorsFn = bindUserAccelerators({});
+  const items = [
+    { role: 'about' },
+    { type: 'separator' }
+  ];
+
+  const actual = items.map(bindUserAcceleratorsFn);
+  const expected = items;
+
+  t.deepEqual(actual, expected);
+});
+
+test('bindUserAccelerators: users accelerators have prio over default ones', t => {
+  const bindUserAcceleratorsFn = bindUserAccelerators({
+    findUserAccelerators: R.always(['A']),
+    findDefaultAccelerators: R.always(['B', 'C']),
+  });
+  const item = { command: 'CMD' };
+
+  const actual = bindUserAcceleratorsFn(item);
+  const expected = { command: 'CMD', accelerator: 'A' };
+
+  t.deepEqual(actual, expected);
+});
+
+test('bindUserAccelerators: default accelerators are used one there are no user ones', t => {
+  const bindUserAcceleratorsFn = bindUserAccelerators({
+    findUserAccelerators: R.always([]),
+    findDefaultAccelerators: R.always(['B', 'C']),
+  });
+  const item = { command: 'CMD' };
+
+  const actual = bindUserAcceleratorsFn(item);
+  const expected = { command: 'CMD', accelerator: 'B' };
+
+  t.deepEqual(actual, expected);
 });

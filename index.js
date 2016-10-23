@@ -31,19 +31,18 @@ const addCommand = predefined => {
   };
 }
 
-const bindAccelerators = item => {
+const bindUserAccelerators = ({ findUserAccelerators, findDefaultAccelerators }) => item => {
   const { command } = item;
   if (!command) {
     return item;
   }
-  const findUserAccelerators = findAccelerators(storage.keymap);
-  const findDefaultAccelerators = findAccelerators(defaultKeymap);
 
-  const [userAccelerator,] = findUserAccelerators(command);
-  const [defaultAccelerator,] = findDefaultAccelerators(command);
+  const userAccelerator = findUserAccelerators(command)[0];
+  const defaultAccelerator = findDefaultAccelerators(command)[0];
 
-  const accelerator = userAccelerator ? userAccelerator : defaultAccelerator;
-  return R.merge(item, { accelerator });
+  return R.merge(item, {
+    accelerator: (userAccelerator || defaultAccelerator),
+  });
 };
 
 const rebindConflictedAccelerators = item => {
@@ -77,13 +76,20 @@ const decorateMenuWith = fn => R.map(R.over(
 ));
 
 module.exports = {
+  // helpers
   capture,
   decorateMenuWith,
   addCommand,
+  bindUserAccelerators,
+
+  // Hyper's stuff
   decorateConfig: R.tap(capture('keymap', storage)),
   decorateMenu: decorateMenuWith(R.pipe(
     addCommand(predefinedMenuCommands),
-    bindAccelerators,
+    bindUserAccelerators({
+      findUserAccelerators: findAccelerators(storage.keymap),
+      findDefaultAccelerators: findAccelerators(defaultKeymap),
+    }),
     rebindConflictedAccelerators
   ))
 }
