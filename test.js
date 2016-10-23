@@ -1,6 +1,9 @@
 import test from 'ava';
-import { id } from './';
+import { capture } from './';
 
-test('keymap', t => {
-  t.is(id(1), 1);
+test('capture', t => {
+  let storage = {};
+  capture('keymap', storage)({ keymap: 'captured' });
+
+  t.is(storage.keymap, 'captured');
 });

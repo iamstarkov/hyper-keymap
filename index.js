@@ -2,11 +2,11 @@ const R = require('ramda');
 const defaultKeymap = require('./default-keymap');
 const predefinedMenuCommands = require('./predefined-menu-commands');
 
-let userKeymap;
-const decorateConfig = config => {
-  userKeymap = config.keymap || {};
-  return config;
-}
+let storage = {};
+
+const capture = (key, _) => config => {
+  _[key] = config[key] || {};
+};
 
 const acceleratorsReducerBy = inputCommand =>
   (accelerators, [accelerator, command]) =>
@@ -36,7 +36,7 @@ const bindAccelerators = item => {
   if (!command) {
     return item;
   }
-  const findUserAccelerators = findAccelerators(userKeymap);
+  const findUserAccelerators = findAccelerators(storage.keymap);
   const findDefaultAccelerators = findAccelerators(defaultKeymap);
 
   const [userAccelerator,] = findUserAccelerators(command);
@@ -52,8 +52,8 @@ const rebindConflictedAccelerators = item => {
     return item;
   }
 
-  const userAccelerators = R.keys(userKeymap);
-  const userCommands = R.values(userKeymap);
+  const userAccelerators = R.keys(storage.keymap);
+  const userCommands = R.values(storage.keymap);
   const didUserUseThisAccelerator = userAccelerators.includes(accelerator);
   const didUserRedefineCommand = userCommands.includes(command);
   const isConflicted = didUserUseThisAccelerator && !didUserRedefineCommand;
@@ -80,10 +80,8 @@ const decorateMenu = R.map(R.over(
   ))
 ));
 
-const id = x => x;
-
 module.exports = {
-  decorateConfig,
+  capture,
+  decorateConfig: R.tap(capture('keymap', storage)),
   decorateMenu,
-  id,
 }
