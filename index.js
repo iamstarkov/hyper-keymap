@@ -12,9 +12,8 @@ const acceleratorsReducerBy = inputCommand =>
   (accelerators, [accelerator, command]) =>
     accelerators.concat((inputCommand === command) ? [accelerator] : []);
 
-const findAccelerators = R.curry(
-  (keymap, inputCommand) =>
-    R.toPairs(keymap).reduce(acceleratorsReducerBy(inputCommand) , [])
+const findAccelerators = R.curry((keymap, inputCommand) =>
+  R.toPairs(keymap).reduce(acceleratorsReducerBy(inputCommand) , [])
 );
 
 const addCommand = predefined => {
@@ -77,6 +76,7 @@ const decorateMenuWith = fn => R.map(R.over(
 module.exports = {
   // helpers
   capture,
+  findAccelerators,
   decorateMenuWith,
   addCommand,
   bindUserAccelerators,

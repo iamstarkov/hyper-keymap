@@ -1,6 +1,13 @@
 import test from 'ava';
 import R from 'ramda';
-import { capture, decorateMenuWith, addCommand, bindUserAccelerators, rebindConflictedAccelerators } from './';
+import {
+  capture,
+  findAccelerators,
+  decorateMenuWith,
+  addCommand,
+  bindUserAccelerators,
+  rebindConflictedAccelerators
+} from './';
 
 
 test('capture', t => {
@@ -17,6 +24,20 @@ test('capture undefined keymap results in empty object', t => {
   capture('keymap', storage)(config);
 
   t.deepEqual(storage.keymap, {});
+});
+
+test('findAccelerators', t => {
+  const keymap = {
+    'CmdOrCtrl+Alt+Left':    'prev-tab',
+    'CmdOrCtrl+Alt+Right':   'next-tab',
+    'CmdOrCtrl+Shift+Left':  'prev-tab',
+    'CmdOrCtrl+Shift+Right': 'next-tab',
+  };
+
+  const actual = findAccelerators(keymap, 'next-tab');
+  const expected = [ 'CmdOrCtrl+Alt+Right', 'CmdOrCtrl+Shift+Right' ];
+
+  t.deepEqual(actual, expected);
 });
 
 test('decorateMenuWith', t => {
