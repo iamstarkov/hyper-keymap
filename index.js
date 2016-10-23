@@ -1,5 +1,6 @@
 const R = require('ramda');
 const defaultKeymap = require('./default-keymap');
+const predefinedMenuCommands = require('./predefined-menu-commands');
 
 let userKeymap;
 const decorateConfig = config => {
@@ -13,6 +14,21 @@ const acceleratorsReducerBy = inputCommand =>
 
 const findAccelerators = keymap => inputCommand => {
   return R.toPairs(keymap).reduce(acceleratorsReducerBy(inputCommand) , []);
+}
+
+const addCommand = predefined => {
+  const labelsToPredefine = R.pluck('label', predefined);
+  const findCommand = item => R.pipe(
+    R.find(R.propEq('label', item.label)),
+    R.prop('command')
+  )(predefined);
+
+  return item => {
+    if (!R.contains(item.label, labelsToPredefine)) {
+      return item;
+    }
+    return R.merge(item, { command: findCommand(item) });
+  };
 }
 
 const bindAccelerators = item => {
@@ -58,6 +74,7 @@ const rebindConflictedAccelerators = item => {
 const decorateMenu = R.map(R.over(
   R.lensProp('submenu'),
   R.map(R.pipe(
+    addCommand(predefinedMenuCommands),
     bindAccelerators,
     rebindConflictedAccelerators
   ))
