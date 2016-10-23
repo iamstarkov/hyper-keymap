@@ -38,6 +38,7 @@
     "exclude": [
       "node_modules",
       "default-keymap.js",
+      "predefined-menu-commands.js",
       "test.js"
     ]
   },
