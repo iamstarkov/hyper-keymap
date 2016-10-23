@@ -63,7 +63,7 @@ const rebindConflictedAccelerators = ({ userKeymapFn, defaultKeymapFn }) => item
 
   const defaultAccelerators = findAccelerators(defaultKeymapFn(), command);
   const defaultAcceleratorsWithoutUserOnes = R.without(userAccelerators, defaultAccelerators);
-  const [newAccelerator,] = defaultAcceleratorsWithoutUserOnes;
+  const newAccelerator = defaultAcceleratorsWithoutUserOnes[0];
 
   return R.merge(item, { accelerator: newAccelerator });
 }
