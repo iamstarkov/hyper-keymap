@@ -7,7 +7,7 @@ import {
   addCommand,
   bindUserAccelerators,
   rebindConflictedAccelerators
-} from './';
+} from '../';
 
 
 test('capture', t => {

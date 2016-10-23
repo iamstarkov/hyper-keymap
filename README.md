@@ -27,7 +27,7 @@ Or use [hpm][hpm]
 
 ## Usage
 
-There is a [default keymap](./default-keymap.js), which is used by Hyper.
+There is a [default keymap](./src/default-keymap.js), which is used by Hyper.
 
 In order to change hotkeys you are unhappy with, add `keymap` object to your config:
 

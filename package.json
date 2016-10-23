@@ -2,11 +2,9 @@
   "name": "hyper-keymap",
   "version": "0.0.0",
   "description": "Hotkeys management for Hyper",
-  "main": "index.js",
+  "main": "src",
   "files": [
-    "default-keymap.js",
-    "index.js",
-    "predefined-menu-commands.js"
+    "src"
   ],
   "scripts": {
     "test": "ava",
@@ -23,9 +21,6 @@
     "plugins": [
       "require-path-exists"
     ],
-    "ignore": [
-      "coverage"
-    ],
     "env": {
       "node": true,
       "es6": true
@@ -40,11 +35,8 @@
     }
   },
   "nyc": {
-    "exclude": [
-      "node_modules",
-      "default-keymap.js",
-      "predefined-menu-commands.js",
-      "test.js"
+    "include": [
+      "src/index.js"
     ],
     "reporter": [
       "text",
