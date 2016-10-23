@@ -1,6 +1,6 @@
 {
   "name": "hyper-keymap",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "description": "Hotkeys management for Hyper",
   "main": "src",
   "files": [
