@@ -78,8 +78,9 @@ const decorateMenuWith = fn => R.map(R.over(
 
 module.exports = {
   capture,
-  decorateConfig: R.tap(capture('keymap', storage)),
   decorateMenuWith,
+  addCommand,
+  decorateConfig: R.tap(capture('keymap', storage)),
   decorateMenu: decorateMenuWith(R.pipe(
     addCommand(predefinedMenuCommands),
     bindAccelerators,
