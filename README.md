@@ -17,7 +17,7 @@ plugins: [
 ],
 ```
 
-Or with [hpm][hpm]
+Or use [hpm][hpm]
 
     npm install -g hpm
     hpm i hyper-keymap
@@ -27,9 +27,9 @@ Or with [hpm][hpm]
 
 ## Usage
 
-There is a [default keymap](./default-keymap.js), exported from Hyper.
+There is a [default keymap](./default-keymap.js), which is used by Hyper.
 
-In order to rebind keys you need to add `keymap` object to your config, so it looks this:
+In order to change hotkeys you are unhappy with, add `keymap` object to your config:
 
 ```js
 module.exports = {
@@ -62,7 +62,7 @@ keymap: {
 
 Your keymap has prio over default one.
 
-## Electron's accelerator
+## Electron's accelerators
 
 It is a way to define keyboard shortcuts.
 
@@ -72,7 +72,6 @@ Examples:
 
 * `CommandOrControl+A`
 * `CommandOrControl+Shift+Z`
-
 
 Check out Electron's [accelerators][elacc] documentation.
 
@@ -104,7 +103,6 @@ Check out Electron's [accelerators][elacc] documentation.
 ## License
 
 MIT © [Vladimir Starkov](https://iamstarkov.com)
-
 
 [npm-url]: https://npmjs.org/package/hyper-keymap
 [npm-image]: https://img.shields.io/npm/v/hyper-keymap.svg?style=flat-square
