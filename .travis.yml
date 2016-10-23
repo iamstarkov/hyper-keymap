@@ -4,4 +4,6 @@ node_js:
 before_script:
   - 'npm run lint'
 after_script:
-  - 'npm run coveralls'
+  - 'npm i -g coveralls'
+  - 'nyc -r lcov -r text ava'
+  - 'coveralls < coverage/lcov.info'

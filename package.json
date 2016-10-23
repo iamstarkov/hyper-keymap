@@ -6,8 +6,7 @@
   "scripts": {
     "test": "ava",
     "lint": "eslint .",
-    "coverage": "nyc ava",
-    "coveralls": "nyc ava && coveralls < coverage/lcov.info"
+    "coverage": "nyc ava"
   },
   "engines": {
     "node": ">=6.5.0"
@@ -40,10 +39,6 @@
       "node_modules",
       "default-keymap.js",
       "test.js"
-    ],
-    "reporter": [
-      "text",
-      "lcov"
     ]
   },
   "repository": {
@@ -76,7 +71,6 @@
   },
   "devDependencies": {
     "ava": "^0.16.0",
-    "coveralls": "^2.11.14",
     "eslint": "^3.8.1",
     "eslint-config-pedant": "^0.8.0",
     "eslint-plugin-require-path-exists": "^1.1.5",
