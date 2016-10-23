@@ -46,14 +46,14 @@ const bindUserAccelerators = ({ userKeymapFn, defaultKeymapFn }) => item => {
   });
 };
 
-const rebindConflictedAccelerators = item => {
+const rebindConflictedAccelerators = ({ userKeymapFn, defaultKeymapFn }) => item => {
   const { accelerator, command } = item;
   if (!command) {
     return item;
   }
 
-  const userAccelerators = R.keys(storage.keymap);
-  const userCommands = R.values(storage.keymap);
+  const userAccelerators = R.keys(userKeymapFn());
+  const userCommands = R.values(userKeymapFn());
   const didUserUseThisAccelerator = userAccelerators.includes(accelerator);
   const didUserRedefineCommand = userCommands.includes(command);
   const isConflicted = didUserUseThisAccelerator && !didUserRedefineCommand;
@@ -62,9 +62,7 @@ const rebindConflictedAccelerators = item => {
     return item;
   }
 
-  const findDefaultAccelerators = findAccelerators(defaultKeymap);
-
-  const defaultAccelerators = findDefaultAccelerators(command);
+  const defaultAccelerators = findAccelerators(defaultKeymapFn(), command);
   const defaultAcceleratorsWithoutUserOnes = R.without(userAccelerators, defaultAccelerators);
   const [newAccelerator,] = defaultAcceleratorsWithoutUserOnes;
 
@@ -82,6 +80,7 @@ module.exports = {
   decorateMenuWith,
   addCommand,
   bindUserAccelerators,
+  rebindConflictedAccelerators,
 
   // Hyper's stuff
   decorateConfig: R.tap(capture('keymap', storage)),
@@ -91,6 +90,9 @@ module.exports = {
       userKeymapFn: R.always(storage.keymap),
       defaultKeymapFn: R.always(defaultKeymap),
     }),
-    rebindConflictedAccelerators
+    rebindConflictedAccelerators({
+      userKeymapFn: R.always(storage.keymap),
+      defaultKeymapFn: R.always(defaultKeymap),
+    })
   ))
 }

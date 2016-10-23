@@ -1,6 +1,6 @@
 import test from 'ava';
 import R from 'ramda';
-import { capture, decorateMenuWith, addCommand, bindUserAccelerators } from './';
+import { capture, decorateMenuWith, addCommand, bindUserAccelerators, rebindConflictedAccelerators } from './';
 
 
 test('capture', t => {
@@ -84,6 +84,30 @@ test('bindUserAccelerators: default keymap is used when there is no suitable use
 
   const actual = bindUserAcceleratorsFn(item);
   const expected = { command: 'cmd', accelerator: 'B' };
+
+  t.deepEqual(actual, expected);
+});
+
+test('rebindConflictedAccelerators: use another default accelerator if its conflicted', t => {
+  const rebindConflictedAcceleratorsFn = rebindConflictedAccelerators({
+    userKeymapFn: R.always({ 'CmdOrCtrl+Alt+Right': 'next-pane' }),
+    defaultKeymapFn: R.always({
+      'CmdOrCtrl+Alt+Right':   'next-tab',
+      'ctrl+tab':              'next-tab',
+      'CmdOrCtrl+Shift+Right': 'next-tab',
+      'CmdOrCtrl+Shift+]':     'next-tab',
+    }),
+  });
+  const items = [
+    { command: 'next-tab', accelerator: 'CmdOrCtrl+Alt+Right' },
+    { command: 'next-pane', accelerator: 'CmdOrCtrl+Alt+Right' },
+  ];
+
+  const actual = items.map(rebindConflictedAcceleratorsFn);
+  const expected = [
+    { command: 'next-tab', accelerator: 'ctrl+tab' },
+    { command: 'next-pane', accelerator: 'CmdOrCtrl+Alt+Right' },
+  ];
 
   t.deepEqual(actual, expected);
 });
