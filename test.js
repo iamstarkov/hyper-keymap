@@ -5,9 +5,10 @@ import { capture, decorateMenuWith, addCommand, bindUserAccelerators } from './'
 
 test('capture', t => {
   let storage = {};
-  capture('keymap', storage)({ keymap: 'captured' });
+  const config = { keymap: 'captured' };
+  capture('keymap', storage)(config);
 
-  t.is(storage.keymap, 'captured');
+  t.is(storage.keymap, config.keymap);
 });
 
 test('decorateMenuWith', t => {
