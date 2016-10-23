@@ -5,10 +5,18 @@ import { capture, decorateMenuWith, addCommand, bindUserAccelerators, rebindConf
 
 test('capture', t => {
   let storage = {};
-  const config = { keymap: 'captured' };
+  const config = { keymap: { a: 'b' } };
   capture('keymap', storage)(config);
 
-  t.is(storage.keymap, config.keymap);
+  t.deepEqual(storage.keymap, { a: 'b' });
+});
+
+test('capture undefined keymap results in empty object', t => {
+  let storage = {};
+  const config = {};
+  capture('keymap', storage)(config);
+
+  t.deepEqual(storage.keymap, {});
 });
 
 test('decorateMenuWith', t => {
