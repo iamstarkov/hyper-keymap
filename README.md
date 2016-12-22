@@ -19,7 +19,7 @@ plugins: [
 
 Or use [hpm][hpm]
 
-    npm install -g hpm
+    npm install -g hpm-cli
     hpm i hyper-keymap
 
 
