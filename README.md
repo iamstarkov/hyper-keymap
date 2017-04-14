@@ -11,7 +11,7 @@
 
 Sorry, everyone https://github.com/zeit/hyper/pull/925#issuecomment-278622008.
 
-look here instead https://github.com/ppot/hyper/issues/11 
+look here instead https://github.com/zeit/hyper/pull/1509 
 
 ## Install
 
