@@ -69,13 +69,13 @@
   },
   "homepage": "https://github.com/iamstarkov/hyper-keymap#readme",
   "dependencies": {
-    "ramda": "^0.22.1"
+    "ramda": "^0.23.0"
   },
   "devDependencies": {
-    "ava": "^0.16.0",
+    "ava": "^0.19.1",
     "eslint": "^3.8.1",
     "eslint-config-pedant": "^0.8.0",
     "eslint-plugin-require-path-exists": "^1.1.5",
-    "nyc": "^8.3.2"
+    "nyc": "^10.2.0"
   }
 }
